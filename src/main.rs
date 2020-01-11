@@ -8,7 +8,7 @@ fn main() {
     let event_loop = EventLoop::new();
 
     let window = WindowBuilder::new()
-        .with_title("A fantastic window!")
+        .with_title("A not so fantastic window!")
         .build(&event_loop)
         .unwrap();
 
