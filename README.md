@@ -16,8 +16,7 @@ The files it can display are of the following format -
 First, download the binary for your OS. Currently, only Linux and Windows binaries are available. If your system isn't listed, or the binary doesn't work for you - use a library computer or follow the build instructions to build it for your system.
 
 ```$xslt
-/mnt/c/Users/Dhruv Dhamani/Dropbox/documents/Digital Image Processing/dip_image_viewer · (master±)
-⟩ ./dip_viewer --help
+C:\Users\Dhruv Dhamani\Dropbox\documents\Digital Image Processing\dip_image_viewer>dip_viewer --help
 ITCS 3134 Image Viewer 0.0.2
 Dhruv Dhamani<ddhamani@uncc.edu>
 
