@@ -31,6 +31,12 @@ OPTIONS:
     -f, --file <FILE>    The path to the text file to be displayed as an image
 ```
 
+You can try it out using the `easy.txt` file in the root of this repository.
+
+```$xslt
+dip_viewer -f easy.txt
+```
+
 ## Build instructions
 
 Ensure you have rustup installed on your system - via https://rustup.rs/
