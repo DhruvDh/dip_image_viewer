@@ -43,6 +43,8 @@ dip_viewer -f easy.txt
 
 Ensure you have rustup installed on your system - via https://rustup.rs/
 
+> For linux you'll need some X11 headers to build - do run `sudo apt install libx11-dev libxft-dev` before proceeding
+
 ```$xslt
 cargo build --release
 ```
