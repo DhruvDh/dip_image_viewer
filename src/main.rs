@@ -4,7 +4,7 @@ use std::io::BufRead;
 use std::path::Path;
 
 use clap::{App, Arg};
-use pixels::{Pixels, SurfaceTexture, wgpu::Surface};
+use pixels::{Pixels, SurfaceTexture, wgpu::Surface, PixelsBuilder};
 use winit::{
     dpi::LogicalSize,
     event::{Event, VirtualKeyCode},
@@ -96,6 +96,7 @@ fn get_pixels<P>(filename: P) -> (Vec<u8>, usize, usize)
         }
     }
 
+    println!("{}", lines.len());
     let mut img: Vec<u8> = vec![];
 
     if lines.len() < 3 {
@@ -129,6 +130,7 @@ fn get_pixels<P>(filename: P) -> (Vec<u8>, usize, usize)
         }
     }
 
+    println!("{}", img.len());
     (img, height, width)
 }
 
@@ -163,13 +165,20 @@ fn main() {
 
     let mut input = WinitInputHelper::new();
 
+    let mut hidpi_factor = window.hidpi_factor();
+    let size = window.inner_size().to_physical(window.hidpi_factor());
+
+    let width = size.width.round() as u32;
+    let height = size.height.round() as u32;
+
     let mut pixels = {
         let surface = Surface::create(&window);
-        let surface_texture = SurfaceTexture::new(width as u32, height as u32, surface);
-        Pixels::new(width as u32, height as u32, surface_texture).expect("Couldn't make a pixel buffer")
+        let surface_texture = SurfaceTexture::new(width, height, surface);
+        PixelsBuilder::new(width, height, surface_texture)
+            .pixel_aspect_ratio(1.0)
+            .build()
+            .expect("Couldn't make a pixel buffer")
     };
-
-    let mut hidpi_factor = window.hidpi_factor();
 
     event_loop.run(move |event, _, control_flow| {
         // Draw the current frame
