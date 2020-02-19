@@ -166,11 +166,14 @@ fn main() {
     let mut input = WinitInputHelper::new();
 
     let mut hidpi_factor = window.hidpi_factor();
-    let size = window.inner_size().to_physical(window.hidpi_factor());
+//    let size = window.inner_size().to_physical(window.hidpi_factor());
+//
+//    let width = size.width.round() as u32;
+//    let height = size.height.round() as u32;
 
-    let width = size.width.round() as u32;
-    let height = size.height.round() as u32;
-
+    let width = width as u32;
+    let height = height as u32;
+    dbg!((width, height));
     let mut pixels = {
         let surface = Surface::create(&window);
         let surface_texture = SurfaceTexture::new(width, height, surface);
@@ -179,6 +182,7 @@ fn main() {
             .build()
             .expect("Couldn't make a pixel buffer")
     };
+    window.request_redraw();
 
     event_loop.run(move |event, _, control_flow| {
         // Draw the current frame
