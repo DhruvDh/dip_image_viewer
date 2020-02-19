@@ -2,6 +2,8 @@
 
 A simple image viewer written for use in ITCS 3134 - Digital Image Processing.
 
+> **If you can't get this to work for whatsoever reason, just submit the image text files as is**
+
 The files it can display are of the following format -
 
 > As an "output" for each Part of the assignment, you will be creating a text file using the program you write. Each part is going to ask of you to create an image, and each image will be in this following format -
@@ -44,6 +46,8 @@ dip_viewer -f easy.txt
 Ensure you have rustup installed on your system - via https://rustup.rs/
 
 > For linux you'll need some X11 headers to build - do run `sudo apt install libx11-dev libxft-dev` before proceeding
+
+> For windows, you will need to install Windows 10 SDK or better yet install Visual Studio with the "Desktop development with C++" workload.
 
 ```$xslt
 cargo build --release
