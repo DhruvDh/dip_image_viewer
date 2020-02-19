@@ -1,5 +1,7 @@
 # Image Viewer
 
+There is also a web-version, available here - https://dhruvdh.github.io/dip_image_viewer/
+
 A simple image viewer written for use in ITCS 3134 - Digital Image Processing.
 
 > **If you can't get this to work for whatsoever reason, just submit the image text files as is**
