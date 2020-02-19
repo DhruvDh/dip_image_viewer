@@ -15,6 +15,8 @@ The files it can display are of the following format -
 
 First, download the binary for your OS. Currently, only Linux and Windows binaries are available. If your system isn't listed, or the binary doesn't work for you - use a library computer or follow the build instructions to build it for your system.
 
+> On Windows, you might need to install ensure a Visual C/C++ runtime is installed first. You can do that by installing `vc_redist.x64.exe` from [here](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads)
+
 ```$xslt
 C:\Users\Dhruv Dhamani\Dropbox\documents\Digital Image Processing\dip_image_viewer>dip_viewer --help
 ITCS 3134 Image Viewer 0.0.2
@@ -40,6 +42,8 @@ dip_viewer -f easy.txt
 ## Build instructions
 
 Ensure you have rustup installed on your system - via https://rustup.rs/
+
+> For linux you'll need some X11 headers to build - do run `sudo apt install libx11-dev libxft-dev` before proceeding
 
 ```$xslt
 cargo build --release
