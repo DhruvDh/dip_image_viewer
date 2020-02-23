@@ -32,9 +32,7 @@ function assert(condition, statement) {
 function parseAndDraw() {
   document.getElementById('errorLog').value = "";
 
-  text = document.getElementById("imgText").value.split("\n");
-
-  console.log(text);
+  text = document.getElementById("imgText").value.trim().split("\n");
 
   assert(
     text.length <= 3,
@@ -72,7 +70,7 @@ function parseAndDraw() {
 
   let img = []
 
-  for (let i = 3; i < height * width; i++) {
+  for (let i = 3; i < height * width + 3; i++) {
     let colors = text[i].split(' ')
 
 
@@ -111,7 +109,6 @@ function parseAndDraw() {
       (blue < 0) && (blue > 255),
       `Blue component of pixel no. ${i - 3} is not between 0 and 255.`
     )
-    // console.log(`${i}: (${red}, ${green}, ${blue})`);
 
     img.push(red)
     img.push(green)
@@ -126,20 +123,16 @@ function doTheThing(imgArray, width, height) {
   const s = (p) => {
     p.setup = function () {
 
-      let img = p.createImage(width, height); // same as new p5.Image(100, 100);
+      let img = p.createImage(width, height);
            
       img.loadPixels();
       p.createCanvas(width, height);
-      p.background(0);
-
-      // helper for writing color to array
-      function writeColor(image, x, y, red, green, blue, alpha) {
-
-      }
-
-      for (let i = 0; i < width * height * 4; i++) {
-        img.pixels[i] = imgArray[i]
-      }
+      
+      let i = 0;
+      imgArray.forEach(pixel => {
+        img.pixels[i] = pixel;
+        i = i + 1;
+      });
 
       img.updatePixels();
       p.image(img, 0, 0);
