@@ -72,7 +72,7 @@ function parseAndDraw() {
 
   let img = []
 
-  for (let i = 3; i < numPixels + 3; i++) {
+  for (let i = 3; i < height * width; i++) {
     let colors = text[i].split(' ')
 
 
@@ -113,7 +113,10 @@ function parseAndDraw() {
     )
     // console.log(`${i}: (${red}, ${green}, ${blue})`);
 
-    img.push([red, green, blue])
+    img.push(red)
+    img.push(green)
+    img.push(blue)
+    img.push(255)
   }
 
   doTheThing(img, width, height)
@@ -122,34 +125,20 @@ function parseAndDraw() {
 function doTheThing(imgArray, width, height) {
   const s = (p) => {
     p.setup = function () {
-      let img = p.createImage(height, width); // same as new p5.Image(100, 100);
+
+      let img = p.createImage(width, height); // same as new p5.Image(100, 100);
+           
       img.loadPixels();
-      p.createCanvas(height, width);
+      p.createCanvas(width, height);
       p.background(0);
 
       // helper for writing color to array
       function writeColor(image, x, y, red, green, blue, alpha) {
-        let index = (x + y * width) * 4;
-        image.pixels[index] = red;
-        image.pixels[index + 1] = green;
-        image.pixels[index + 2] = blue;
-        image.pixels[index + 3] = alpha;
+
       }
 
-      let x, y;
-      // fill with random colors
-
-      let i = 0;
-      for (y = 0; y < img.height; y++) {
-        for (x = 0; x < img.width; x++) {
-          let red = imgArray[i][0];
-          let green = imgArray[i][1];
-          let blue = imgArray[i][2];
-          let alpha = 255;
-          writeColor(img, x, y, red, green, blue, alpha);
-
-          i++;
-        }
+      for (let i = 0; i < width * height * 4; i++) {
+        img.pixels[i] = imgArray[i]
       }
 
       img.updatePixels();
