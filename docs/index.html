@@ -14,19 +14,47 @@
   <script src="p5.min.js"></script>
   <script src="p5.sound.min.js"></script>
   <script src="sketch.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
   <link rel="stylesheet" href="bulma.min.css">
 </head>
 
 <body>
   
-  <div class="container" id="app">
-    <div class="section">
-      <textarea class="textarea" id="imgText" placeholder="Paste text from image file here, and click on load."></textarea>
+  <div class="section" id="app">
+    <div class="container">
+      <div class="file has-name is-fullwidth" id="fileUpload">
+        <label class="file-label">
+          <input id="fileInput" class="file-input" type="file" name="imgtext">
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-upload"></i>
+            </span>
+            <span class="file-label">
+              Choose a file…
+            </span>
+          </span>
+          <span id="fileInputName" class="file-name">
+            No file uploaded
+          </span>
+        </label>
+      </div>
+
       <button class="button is-info is-fullwidth" onclick="parseAndDraw()">Load</button>
-      <div class="container" id="hint"></div>
-      <textarea class="textarea" id="errorLog" readonly></textarea>
+      <div class="container">
+
+      </div>
+      <article class="message is-dark" id="logContainer">
+        <div class="message-header" id="hint">
+          <p>Log</p>
+        </div>
+        <div class="message-body" id="errorLog">
+          Empty.
+        </div>
+      </article>
     </div>
-    <div id="sketch" class="section"></div>
+    <canvas id="histogram" class="container"></div>
+    <div id="sketch" class="container"></div>
   </div>
 
 </body>
