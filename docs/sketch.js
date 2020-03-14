@@ -152,14 +152,16 @@ function parseAndDraw() {
         onlyBlue = Uint8ClampedArray.from(onlyBlue);
 
         doTheThing(img, width, height);
-        chart = doTheHistogramThing(onlyRed, onlyBlue, onlyGreen);
+        doTheHistogramThing(onlyRed, onlyBlue, onlyGreen);
         document.getElementById("logContainer").className = "message is-primary";
         document.getElementById("hint").innerText = "I think it worked.";
     };
 }
 
 function doTheHistogramThing(onlyRed, onlyBlue, onlyGreen) {
-    var ctx = document.getElementById("histogram").getContext("2d");
+    var redctx = document.getElementById("histogram-red").getContext("2d");
+    var greenctx = document.getElementById("histogram-green").getContext("2d");
+    var bluectx = document.getElementById("histogram-blue").getContext("2d");
     Chart.defaults.global.datasets.scatter.showLine = true;
 
     const count = arr =>
@@ -176,7 +178,24 @@ function doTheHistogramThing(onlyRed, onlyBlue, onlyGreen) {
         return data;
     };
 
-    var myChart = new Chart(ctx, {
+    let chartOptions =   {
+        scales: {
+            xAxes: [{
+                ticks: {
+                    stepSize: 8,
+                    min: 0,
+                    max: 255
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+
+    var redChart = new Chart(redctx, {
         type: 'scatter',
         data: {
             datasets: [{
@@ -185,36 +204,40 @@ function doTheHistogramThing(onlyRed, onlyBlue, onlyGreen) {
                 backgroundColor: ['rgba(255, 99, 132, 0.2)'],
                 borderWidth: 1,
                 borderColor: ['rgb(255, 0, 0)']
-            },
-            {
+            }]
+        },
+        options: chartOptions
+    });
+
+    var greenChart = new Chart(greenctx, {
+        type: 'scatter',
+        data: {
+            datasets: [{
                 label: 'Green',
                 data: getData(onlyGreen),
                 backgroundColor: ['rgba(75, 192, 192, 0.2)'],
                 borderWidth: 1,
                 borderColor: ['rgb(0, 255, 0)']
-            },
-            {
+            }]
+        },
+        options: chartOptions
+    });
+
+    var blueChart = new Chart(bluectx, {
+        type: 'scatter',
+        data: {
+            datasets: [{
                 label: 'Blue',
                 data: getData(onlyBlue),
                 backgroundColor: ['rgba(54, 162, 235, 0.2)'],
                 borderWidth: 1,
                 borderColor: ['rgb(0, 0, 255)']
-            }
-        ]
+            }]
         },
-        options:  {
-            scales: {
-                xAxes: [{
-                    ticks: {
-                        suggestedMin: 0,
-                        suggestedMax: 255
-                    }
-                }]
-            }
-        }
+        options: chartOptions
     });
 
-    return myChart;
+    return redChart, greenChart, blueChart;
 }
 
 function doTheThing(imgArray, width, height) {
