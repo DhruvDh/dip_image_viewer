@@ -169,16 +169,26 @@ function doTheHistogramThing(onlyRed, onlyBlue, onlyGreen) {
     const getData = arr => {
         let counts = count(arr);
         let data = [];
-        for (var key in counts) {
-            data.push({
-                x: key,
-                y: counts[key]
-            })
+
+        for (let i = 0; i < 256; i++) {
+            if (i in counts) {
+                data.push({
+                    x: i,
+                    y: counts[i]
+                })
+            }
+            else {
+                data.push({
+                    x: i,
+                    y: 0
+                })
+            }
         }
+
         return data;
     };
 
-    let chartOptions =   {
+    let chartOptions = {
         scales: {
             xAxes: [{
                 ticks: {
